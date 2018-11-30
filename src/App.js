@@ -5,6 +5,10 @@ import MyFunctionalComponent from './MyFunctionalComponent';
 import MyPureComponent from './MyPureComponent';
 import MyPortal from './MyPortal';
 import MyComponentWithBind from './MyComponentWithBind';
+import Counter from './Counter';
+import CounterSharedState from './CounterSharedState';
+import CounterUseEffect from './UseEffect';
+import UseRef from './UseRef';
 import './App.css';
 
 class App extends Component {
@@ -46,6 +50,10 @@ class App extends Component {
           <MyFunctionalComponent version="111" />
           <MyPureComponent label="some prop" />
           <MyComponentWithBind />
+          <Counter />
+          <CounterSharedState />
+          <CounterUseEffect />
+          <UseRef />
           {overlay}
 
         </header>
