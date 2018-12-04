@@ -1,32 +1,12 @@
 import React, { useReducer, useRef, useEffect } from 'react'
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'LAPSE':
-      return {
-        ...state,
-        lapse: action.now - action.startTime,
-      }
-    case 'TOGGLE_RUNNING':
-      return {
-        ...state,
-        running: !state.running,
-      }
-    case 'CLEAR':
-      return {
-        ...state,
-        running: false,
-        lapse: 0,
-      }
-    default:
-      return state
-  }
+function reducer(currentState, newState) {
+  return { ...currentState, ...newState } // we have turned the reducer into a simple merge as the state in this app is quiet simple
 }
 
 function Stopwatch() {
-  // { running, lapse } is from state returned from reducer
-  // the second value in the array is the `dispatch` or update function
-  const [{ running, lapse }, dispatch] = useReducer(reducer, {
+  // we renamed "dispatch" to setState to make what its doing more obvious in this examplet 
+  const [{ running, lapse }, setState] = useReducer(reducer, {
     running: false,
     lapse: 0,
   })
@@ -38,19 +18,19 @@ function Stopwatch() {
 
   function handleRunClick() {
     if (running) {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current)
     } else {
       const startTime = Date.now() - lapse
       intervalRef.current = setInterval(() => {
-        dispatch({ type: 'LAPSE', now: Date.now(), startTime })
+        setState({ lapse: Date.now() - startTime })
       }, 0)
     }
-    dispatch({ type: 'TOGGLE_RUNNING' })
+    setState({ running: !running })
   }
 
   function handleClearClick() {
     clearInterval(intervalRef.current)
-    dispatch({ type: 'CLEAR' })
+    setState({ lapse: 0, running: false })
   }
 
   return (

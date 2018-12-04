@@ -10,6 +10,7 @@ import CounterSharedState from './CounterSharedState';
 import CounterUseEffect from './UseEffect';
 import UseRef from './UseRef';
 import UseReducer from './UseReducer';
+import UseSimpleReducer from './UseSimpleReducer';
 import './App.css';
 
 class App extends Component {
@@ -56,6 +57,7 @@ class App extends Component {
           <CounterUseEffect />
           <UseRef />
           <UseReducer />
+          <UseSimpleReducer />
           {overlay}
 
         </header>
