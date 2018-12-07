@@ -11,12 +11,18 @@ import CounterUseEffect from './UseEffect';
 import UseRef from './UseRef';
 import UseReducer from './UseReducer';
 import UseSimpleReducer from './UseSimpleReducer';
+import { Toolbar, ThemeContext, themes } from './ContextAPI-Pass-Props';
+
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { overlayActive: true };
+    this.state = { 
+      overlayActive: true,
+      theme: themes.light,
+      someText: 'this is from the top level',
+    };
   }
 
   closeOverlay = () => {
@@ -58,6 +64,15 @@ class App extends Component {
           <UseRef />
           <UseReducer />
           <UseSimpleReducer />
+          <ThemeContext.Provider value={{
+            themeToPass: this.state.theme,
+            someTextToPass: this.state.someText,
+            onClickHandlerToPass: () => {
+              console.log('called function in parent');
+            }
+          }}>
+            <Toolbar changeTheme={this.toggleTheme} />
+          </ThemeContext.Provider>
           {overlay}
 
         </header>
